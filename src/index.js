@@ -38,27 +38,32 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-   let str=expr;
-   let arr;
-   let symbol;
-   let result;
-   arr=str.split('');
-   while(arr.length){
-    symbol=arr.slice(0,9);
-    arr=arr.splice(0,9);
-    if(symbol === '**********'){result+=' ';}
-    result+=findSymbol(symbol);
-   }
-   return result;
-}
-function findSymbol(numderStr){
-    let res=parseInt(numderStr);
-    let resStr=res.toString();
-    resStr.replace('10','.');
-    resStr.replace('11','-');
-    return MORSE_TABLE[resStr];
-}
-
+    let str=expr;
+    let arr;
+    let symbol;
+    let result='';
+    arr=str.split('');
+    while(arr.length){
+     symbol=arr.slice(0,10);
+     arr.splice(0,10);
+     if(symbol.join('') === '**********'){
+       result+=' ';
+      }else{
+        result+=findSymbol(symbol.join(''));
+      }
+     
+    }
+    return result;
+  }
+  function findSymbol(numderStr){
+     let res=parseInt(numderStr);
+     let resStr=res.toString();
+     var re = /10/gi;
+     var re1 = /11/gi;
+     resStr=resStr.replace(re,'.');
+     resStr=resStr.replace(re1,'-');
+     return MORSE_TABLE[resStr];
+  }
 module.exports = {
     decode
 }
