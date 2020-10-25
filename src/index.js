@@ -47,7 +47,7 @@ function decode(expr) {
     symbol=arr.slice(0,9);
     arr=arr.splice(0,9);
     if(symbol === '**********'){result+=' ';}
-    result+=findSymbol(symbol)
+    result+=findSymbol(symbol);
    }
    return result;
 }
